@@ -1,17 +1,16 @@
 const sql = require('mssql');
 
 const config = {
-    user: 'connection',
-    password: 'projetobinario',
-    server: '127.0.0.1',
-    port: 1433,
-    database: 'FestaBinaria',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_NAME,
+
     options: {
-        encrypt: false,
-        trustServerCertificate: true
+        encrypt: true,
+        trustServerCertificate: false
     }
 };
-
 let pool;
 
 async function initConnection() {
