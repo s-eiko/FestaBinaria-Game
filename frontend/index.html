@@ -66,7 +66,7 @@
 
     async function logout() {
         const response = await fetch(
-            'https://festa-binaria.onrender.com/logout',
+            'https://festabinaria-game.onrender.com/logout',
             {
                 method: 'POST',
                 credentials: 'include'
@@ -83,7 +83,7 @@
 
         // atualiza interface
         const response = await fetch(
-            'https://festa-binaria.onrender.com/check-login',
+            'https://festabinaria-game.onrender.com/check-login',
             { credentials: 'include' }
         );
         const data = await response.json();
@@ -108,7 +108,7 @@
 
                 // atualiza pontos na tela
                 const loginResponse = await fetch(
-                    'https://festa-binaria.onrender.com/check-login',
+                    'https://festabinaria-game.onrender.com/check-login',
                     { credentials: 'include' }
                 );
 

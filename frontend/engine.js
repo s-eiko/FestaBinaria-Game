@@ -12,7 +12,7 @@ var i = 0;
 
 export async function checkLogin() {
     const response = await fetch(
-        'https://festa-binaria.onrender.com/check-login',
+        'https://festabinaria-game.onrender.com/check-login',
         { credentials: 'include' }
     );
     const data = await response.json();
@@ -139,7 +139,7 @@ export async function checkAnswer() {
     if (userStatus == 1) {
         try {
             const response = await fetch(
-                'https://festa-binaria.onrender.com/update-points',
+                'https://festabinaria-game.onrender.com/update-points',
                 {
                     method: 'PUT',
                     headers: {
@@ -189,7 +189,7 @@ export async function showRanking() {
     const rankDisplay = document.getElementById("rank-display");
 
     try {
-        const response = await fetch('https://festa-binaria.onrender.com/ranking');
+        const response = await fetch('https://festabinaria-game.onrender.com/ranking');
 
         const data = await response.json();
         console.log(data);
