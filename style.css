@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: #ffffff;
+}
+
+* {
+    font-family: "Google Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: .5rem;
+    background-color: #FFFCF9;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, #ff697876 0%, #352d397b 100%);
+    border-image-slice: 1;
+}
+
+h1 {
+    font-size: xx-large;
+    color: #FF6978;
+}
+
+nav {
+    justify-content: right;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+
+nav button {
+    color: #FFFCF9;
+    background-color: #4e4254;
+    border: 2px solid #d5d1cb;
+    border-radius: 5px;
+    padding: 5px 9px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+nav button:hover {
+    background-color: #352D39;
+}
+
+#point-display {
+    font-weight: 500;
+    color: #352D39;
+}
+
+main {
+    padding: 1rem;
+    text-align: center;
+}
+
+#title {
+    color: #4e4254;
+    margin-bottom: .5rem;
+}
+
+#title span {
+    color: #FF6978;
+}
+
+#how-to-display {
+    position: absolute;
+    padding: .5rem;
+    background-color: #4e4254;
+    color: #F4FAFF;
+    border: 2px solid #d5d1cb;
+    border-radius: 5px;
+    justify-self: center;
+}
+
+#how-to-display p {
+    text-align: center;
+}
+
+#how-to-display img {
+    display: block;
+    width: 70%;
+    margin: 5px;
+    border-radius: 5px;
+    justify-self: center;
+}
+
+#how-to-display button {
+    color: #352D39;
+    background-color: #FFFCF9;
+    border: 2px solid #4e4254;
+    border-radius: 5px;
+    padding: 5px 9px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+#how-to-display button:hover {
+    background-color: #cac5c0;
+}
+
+#puzzle {
+    inline-size: fit-content;
+    margin: auto;
+    border-radius: 5px;
+}
+
+#grid-template, #puzzle-template {
+    font-size: xx-large;
+    color: #FFFCF9;
+    border: 2px solid #d5d1cb;
+}
+
+#grid-template {
+    border-bottom: 0px;
+    border-radius: 5px 5px 0 0;
+    background-color: #352d39b7;
+}
+
+#puzzle-template {
+    border-top: 0px;
+    border-radius: 0 0 5px 5px;
+    background-color: #fa4f60;
+}
+
+#grid-template > span,
+#puzzle-template > span { 
+    padding: 10px;
+    border: 2px solid #d5d1cb;
+    cursor: pointer;
+}
+
+#grid-template > span:first-child {
+    border-top-left-radius: 5px;
+}
+
+#grid-template > span:last-child {
+    border-top-right-radius: 5px;
+}
+
+#puzzle-template > span:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+#puzzle-template > span:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+#check-button {
+    margin-top: 1rem;
+    color: #FFFCF9;
+    background-color: #352d39b7;
+    border: 3px solid #d5d1cb;
+    border-radius: 5px;
+    padding: 5px 9px;
+    font-weight: 500;
+    font-size: medium;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+#check-button:hover {
+    background-color: #fa4f60;
+}
+
+#form {
+    background-color: #4e4254;
+    color: #F4FAFF;
+    border: 2px solid #d5d1cb;
+    border-radius: 5px;
+    padding: .5rem;
+    inline-size: fit-content;
+    justify-self: center;
+    text-align: justify;
+}
+
+#form div {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-bottom: 10px;
+}
+
+#form div label {
+    justify-self: start;
+}
+
+#form div input {
+    justify-self: end;
+}
+
+#form button {
+    color: #352D39;
+    background-color: #FFFCF9;
+    border: 2px solid #4e4254;
+    border-radius: 5px;
+    padding: 5px 9px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease .2s;
+}
+
+#form button:hover {
+    background-color: #cac5c0;
+}
+
+#rank-display {
+    width: fit-content;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background-color: #352D39;
+    border: 3px solid #352D39;
+    border-radius: 5px;
+}
+
+#rank-display > div:first-of-type {
+    font-weight: 600;
+    font-size: large;
+    background-color: #FF6978;
+}
+
+#rank-display > div:first-of-type p {
+    background-color: #FF6978;
+}
+
+#rank-display div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background-color: #352D39;
+}
+
+#rank-display div p {
+    padding: .5rem;
+    background-color: #d5d1cb;
+    font-weight: 500;
+}

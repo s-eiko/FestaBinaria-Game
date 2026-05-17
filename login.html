@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <h1>Festa Binária</h1>
+        <nav>
+            <button onclick="window.location.href='index.html'">Voltar</button>
+        </nav>
+    </header>
+    <main>
+        <section id="title">
+            <h2>Login</h2>
+            <p>Ainda não possui cadastro? <a href="registration.html">Cadastrar-se</a></p>
+        </section>
+        <section id="form">
+            <form onsubmit="login(event)">
+                <div>
+                    <label for="Usuario">Usuário: </label>
+                    <input type="text" id="Usuario" name="Usuario" required>
+                </div>
+                <div>
+                    <label for="Senha">Senha: </label>
+                    <input type="password" id="Senha" name="Senha" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+<script>
+    async function login(event) {
+        event.preventDefault();
+
+        const Usuario = document.getElementById('Usuario').value;
+        const Senha = document.getElementById('Senha').value;
+
+        try {
+            const response = await fetch(
+                'http://127.0.0.1:3000/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        Usuario,
+                        Senha
+                    })
+                }
+            );
+            const data = await response.json();
+            alert(data.message);
+            if (data.success) {
+                window.location.href = 'index.html';
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro ao realizar login.');
+        }
+    }
+</script>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ranking</title>
+</head>
+<body>
+    <header>
+        <h1>Festa Binária</h1>
+        <nav>
+            <button onclick="window.location.href='index.html'">Voltar</button>
+        </nav>
+    </header>
+    <main>
+        <section id="title">
+            <h2>Ranking de Players</h2>
+        </section>
+        <section id="rank-display"></section>
+    </main>
+</body>
+</html>
+<script type="module">
+    import { showRanking } from './engine.js';
+
+    showRanking();
+</script>

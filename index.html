@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Festa Binária</title>
+</head>
+<body>
+    <header>
+        <h1>Festa Binária</h1>
+        <nav>
+            <p id="point-display"></p>
+            <button onclick="showHowToDisplay()">Como jogar</button>
+            <button onclick="window.location.href='ranking.html'">Ranking</button>
+            <div id="login-display">
+                <button onclick="window.location.href='login.html'">Entrar</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="how-to-display" style="display: none;"></div>
+        <section id="puzzle">
+            <h2 id="title"></h2>
+            <div id="grid-template"></div>
+            <div id="puzzle-template"></div>
+            <button id="check-button">Feito</button>
+        </section>
+    </main>
+</body>
+</html>
+<script type="module">
+    import showPuzzle, { checkLogin, checkAnswer, userDetails } from './engine.js';
+
+    const howToDisplay = document.getElementById("how-to-display");
+    const puzzletemplate = document.getElementById("puzzle-template");
+    const gridtemplate = document.getElementById("grid-template");
+    const logindisplay = document.getElementById("login-display");
+    const checkButton = document.getElementById("check-button");
+    const pointdisplay = document.getElementById("point-display");
+    const title = document.getElementById("title");
+
+    function showHowToDisplay() {
+        howToDisplay.innerHTML = `
+            <h2>Como jogar?</h2>
+            <p>Ao lado direto da tela, será apresentado um número decimal.</p>
+            <img src="images/1.png" alt="Número decimal sendo apontado por uma seta">
+            <p>Seu objetivo é escrevê-lo em formato binário.</p>
+            <p>Clique nos dígitos para alternar entre 0 e 1.</p>
+            <img src="images/2.jpg" alt="Dígito antes de clicar">
+            <img src="images/3.jpg" alt="Dígito depois de clicar">
+            <button onclick="closeHowToDisplay()">Fechar</button>
+        `;
+        howToDisplay.style.display = "block";
+    }
+
+    function closeHowToDisplay() {
+        howToDisplay.innerHTML = "";
+        howToDisplay.style.display = "none";
+    }
+
+    function switchValue(element) {
+        if (element.innerHTML == "0") element.innerHTML = "1";
+        else element.innerHTML = "0";
+    }
+
+    async function logout() {
+        const response = await fetch(
+            'http://127.0.0.1:3000/logout',
+            {
+                method: 'POST',
+                credentials: 'include'
+            }
+        );
+        const data = await response.json();
+        alert(data.message);
+        window.location.reload();
+    }
+
+    async function init() {
+        // verifica login
+        await checkLogin();
+
+        // atualiza interface
+        const response = await fetch(
+            'http://127.0.0.1:3000/check-login',
+            { credentials: 'include' }
+        );
+        const data = await response.json();
+        if (data.logged) {
+            logindisplay.innerHTML =`<button onclick="logout()">Sair</button>`;
+            pointdisplay.innerHTML = `Pontos: ${data.usuario.Pontos}`;
+        } else {
+            logindisplay.innerHTML =`<button onclick="window.location.href='login.html'">Entrar</button>`;
+        }
+
+        // cria puzzle
+        const decimalNumber = showPuzzle(puzzletemplate, gridtemplate);
+        title.innerHTML = `Consegue transformar <span>${decimalNumber}</span> em binário?`;
+
+        // botão feito
+        checkButton.addEventListener("click",
+            async () => {
+                const correct = await checkAnswer();
+                // gera novo puzzle
+                const newDecimalNumber = showPuzzle(puzzletemplate, gridtemplate);
+                title.innerHTML = `Consegue transformar <span>${newDecimalNumber}</span> em binário?`;
+
+                // atualiza pontos na tela
+                const loginResponse = await fetch(
+                    'http://127.0.0.1:3000/check-login',
+                    { credentials: 'include' }
+                );
+
+                const loginData = await loginResponse.json();
+
+                if (loginData.logged) pointdisplay.innerHTML = `Pontos: ${loginData.usuario.Pontos}`;
+            }
+        );
+    }
+
+    window.switchValue = switchValue;
+    window.showHowToDisplay = showHowToDisplay;
+    window.closeHowToDisplay = closeHowToDisplay;
+    window.logout = logout;
+
+    init();
+</script>

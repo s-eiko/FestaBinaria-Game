@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <header>
+        <h1>Festa Binária</h1>
+        <nav>
+            <button onclick="window.location.href='login.html'">Voltar</button>
+        </nav>
+    </header>
+    <main>
+        <section id="title">
+            <h2>Cadastro</h2>
+            <p>Já possui cadastro? <a href="login.html">Faça login</a></p>
+        </section>
+        <section id="form">
+            <form onsubmit="register(event)">
+                <div>
+                    <label for="Usuario">Usuário: </label>
+                    <input type="text" id="Usuario" name="Usuario" required>
+                </div>
+                <div>
+                    <label for="Nome">Nome: </label>
+                    <input type="text" id="Nome" name="Nome" required>
+                </div>
+                <div>
+                    <label for="Senha">Senha: </label>
+                    <input type="password" id="Senha" name="Senha" required>
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+<script>
+    async function register(event) {
+        event.preventDefault();
+
+        const Usuario = document.getElementById('Usuario').value;
+        const Nome = document.getElementById('Nome').value;
+        const Senha = document.getElementById('Senha').value;
+
+        try {
+            const response = await fetch(
+                'http://127.0.0.1:3000/registration',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        Usuario,
+                        Nome,
+                        Senha
+                    })
+                }
+            );
+            const data = await response.json();
+            alert(data.message);
+            if (data.success) {
+                window.location.href = 'login.html';
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro ao cadastrar.');
+        }
+    }
+</script>
