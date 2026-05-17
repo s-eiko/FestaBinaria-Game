@@ -11,21 +11,22 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors({
-    origin: ['http://127.0.0.1:5500'],
+    origin: 'https://festa-binaria-game.vercel.app/',
     credentials: true
 }));
 
 app.use(express.json());
 
+app.set('trust proxy', 1);
+
 app.use(session({
     secret: 'festa-binaria-secret',
     resave: false,
     saveUninitialized: false,
-    cookie: {
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 1000 * 60 * 60
-    }
+        cookie: {
+            secure: true,
+            sameSite: 'none'
+        }
 }));
 
 // CADASTRO
