@@ -3,6 +3,7 @@
 ## Sobre
 
 Festa binária é um jogo para incentivar o aprendizado da transformação de números decimais emm números binário. Os jogadores transformam o número decimal apresentado para binário e ganha pontos! Os 15 melhores jogadores aparecem no ranking de player.
+Acesse em: https://festa-binaria-game.vercel.app/
 
 ## Ferramentas utilizadas
 
