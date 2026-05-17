@@ -70,8 +70,13 @@ function sortNumber(userPoints) {
     ) + minDecimal;
 }
 
-export default function showPuzzle(puzzletemplate, gridtemplate) {
-    currentDecimalNumber = sortNumber(Number(userDetails.pontos));
+export default function showPuzzle(
+    puzzletemplate,
+    gridtemplate
+) {
+    currentDecimalNumber =
+        sortNumber(Number(userDetails.pontos));
+
     const decimalNum = currentDecimalNumber;
     const binaryNum = decimalNum.toString(2);
     const numColumns = binaryNum.length;
@@ -84,13 +89,15 @@ export default function showPuzzle(puzzletemplate, gridtemplate) {
 
     for (i = 0; i < numColumns; i++) {
         puzzletemplate.innerHTML += `
-            <span class='digit' onclick='switchValue(this)'>0</span>
+            <span class='digit'
+            onclick='switchValue(this)'>0</span>
         `;
 
         gridtemplate.innerHTML += `
             <span>
                 2
-                <span style='vertical-align: super; font-size: 0.75em;'>
+                <span style='vertical-align: super;
+                font-size: 0.75em;'>
                     ${numColumns - i - 1}
                 </span>
             </span>
@@ -101,6 +108,7 @@ export default function showPuzzle(puzzletemplate, gridtemplate) {
     puzzletemplate.innerHTML += `<span>${decimalNum}</span>`;
 
     puzzletemplate.style.display = "grid";
+
     puzzletemplate.style.gridTemplateColumns =
         `repeat(${numColumns + 2}, 1fr)`;
 
@@ -108,10 +116,11 @@ export default function showPuzzle(puzzletemplate, gridtemplate) {
     gridtemplate.innerHTML += `<span></span>`;
 
     gridtemplate.style.display = "grid";
+
     gridtemplate.style.gridTemplateColumns =
         `repeat(${numColumns + 2}, 1fr)`;
 
-    return currentDecimalNumber;
+    return decimalNum;
 }
 
 export async function checkAnswer() {
