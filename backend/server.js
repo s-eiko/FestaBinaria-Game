@@ -11,7 +11,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors({
-    origin: 'https://festa-binaria-game.vercel.app/',
+    origin: 'https://festa-binaria-game.vercel.app',
     credentials: true
 }));
 

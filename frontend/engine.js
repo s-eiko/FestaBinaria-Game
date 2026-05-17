@@ -111,7 +111,7 @@ export default function showPuzzle(puzzletemplate, gridtemplate) {
     gridtemplate.style.gridTemplateColumns =
         `repeat(${numColumns + 2}, 1fr)`;
 
-    return decimalNum;
+    return currentDecimalNumber;
 }
 
 export async function checkAnswer() {
