@@ -5,38 +5,39 @@ const config = {
     password: process.env.DB_PASSWORD,
     server: process.env.DB_SERVER,
     database: process.env.DB_NAME,
-
     options: {
         encrypt: true,
         trustServerCertificate: false
     }
 };
-let pool;
 
-async function initConnection() {
+let poolPromise = null;
+
+async function getConnection() {
+
     try {
-        pool = await sql.connect(config);
-        console.log('Conexão bem sucedida!');
+
+        if (!poolPromise) {
+
+            poolPromise = sql.connect(config);
+
+            console.log('Conectando ao banco...');
+        }
+
+        const pool = await poolPromise;
+
+        return pool;
+
     } catch (err) {
+
+        poolPromise = null;
+
         console.error('Erro na conexão:', err);
-    }
-}
 
-function getConnection() {
-    if (!pool) {
-        throw new Error('Banco não conectado');
-    }
-    return pool;
-}
-
-async function endConnection() {
-    if (pool) {
-        await pool.close();
+        throw err;
     }
 }
 
 module.exports = {
-    initConnection,
-    getConnection,
-    endConnection
+    getConnection
 };

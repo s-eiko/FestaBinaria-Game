@@ -3,7 +3,6 @@ const session = require('express-session');
 const cors = require('cors');
 
 const {
-    initConnection,
     getConnection
 } = require('./connect.js');
 
@@ -33,7 +32,7 @@ app.use(session({
 app.post('/registration', async (req, res) => {
     const { Usuario, Nome, Senha } = req.body;
     try {
-        const pool = getConnection();
+        const pool = await getConnection();
         const checkUser = await pool
             .request()
             .input('Usuario', Usuario)
@@ -102,7 +101,7 @@ app.post('/registration', async (req, res) => {
 app.post('/login', async (req, res) => {
     const { Usuario, Senha } = req.body;
     try {
-        const pool = getConnection();
+        const pool = await getConnection();
         const result = await pool
             .request()
             .input('Usuario', Usuario)
@@ -168,7 +167,7 @@ app.get('/data', async (req, res) => {
         });
     }
     try {
-        const pool = getConnection();
+        const pool = await getConnection();
         const result = await pool
             .request()
             .query('SELECT * FROM usuarios');
@@ -201,7 +200,7 @@ app.put('/update-points', async (req, res) => {
     }
 
     try {
-        const pool = getConnection();
+        const pool = await getConnection();
         // UPDATE
         const updateResult = await pool
             .request()
@@ -269,7 +268,7 @@ app.put('/update-points', async (req, res) => {
 // RANKING
 app.get('/ranking', async (req, res) => {
     try {
-        const pool = getConnection();
+        const pool = await getConnection();
         const result = await pool
             .request()
             .query(`SELECT * FROM ranking`);
@@ -289,10 +288,8 @@ app.get('/ranking', async (req, res) => {
     }
 });
 
-async function startServer() {
-    await initConnection();
-    app.listen(PORT, () => {
-        console.log(`Server running on http://127.0.0.1:${PORT}`);
-    });
-}
-startServer();
+app.listen(PORT, () => {
+    console.log(
+        `Server running on port ${PORT}`
+    );
+});
